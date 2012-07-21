@@ -605,7 +605,7 @@ var XMigemoPlaces = {
  
 	openCountColumnSQLFragment      : ', o.open_count open_count', 
 	openCountFinalColumnSQLFragment : ', open_count',
-	openCountSourceSQLFragment      : ' LEFT OUTER JOIN moz_openpages_temp o ON o.place_id = p.id',
+	openCountSourceSQLFragment      : ' LEFT OUTER JOIN moz_openpages_temp o ON o.url = p.url',
   
 	/* output of the SQL must be:
 		SELECT single_string
@@ -918,7 +918,7 @@ var XMigemoPlaces = {
   
 	init : function() 
 	{
-		this.openPageAvailable = XMigemoService.Comparator.compare(XMigemoService.XULAppInfo.version, '3.7a6pre') >= 0;
+		//this.openPageAvailable = XMigemoService.Comparator.compare(XMigemoService.XULAppInfo.version, '3.7a6pre') >= 0;
 		if (!this.openPageAvailable) {
 			this.openCountColumnSQLFragment = '';
 			this.openCountFinalColumnSQLFragment = '';
