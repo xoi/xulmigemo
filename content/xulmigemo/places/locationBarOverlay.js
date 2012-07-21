@@ -859,12 +859,9 @@ var XMigemoLocationBarOverlay = {
 	
 	overrideFunctions : function() 
 	{
-		eval('LocationBarHelpers._searchBegin = '+
-			LocationBarHelpers._searchBegin.toSource().replace(
-				/(\}\))?$/,
-				'if (XMigemoLocationBarOverlay.isMigemoActive) XMigemoLocationBarOverlay.onSearchBegin(); $1'
-			)
-		);
+		this.bar.addEventListener("onsearchbegin", function() {
+			if (XMigemoLocationBarOverlay.isMigemoActive) XMigemoLocationBarOverlay.onSearchBegin();
+		}, false);
 
 		var panel = this.panel;
 		eval('panel._appendCurrentResult = '+
