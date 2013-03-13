@@ -301,12 +301,11 @@ var XMigemoLocationBarOverlay = {
 		'xulmigemo.places.locationBar',
 		'browser.urlbar.autocomplete.enabled'
 	],
-	preferences : <![CDATA[
-		xulmigemo.places.locationBar
-		xulmigemo.places.locationBar.delay
-		xulmigemo.places.locationBar.useThread
-		browser.urlbar.autocomplete.enabled
-	]]>.toString(),
+	preferences :
+		'xulmigemo.places.locationBar\n' +
+		'xulmigemo.places.locationBar.delay\n' +
+		'xulmigemo.places.locationBar.useThread\n' +
+		'browser.urlbar.autocomplete.enabled',
  
 	handleEvent : function(aEvent) 
 	{

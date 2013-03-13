@@ -14,9 +14,6 @@ var xmIXMigemoFind = Ci.xmIXMigemoFind;
 var boxObjectModule = {};
 function getBoxObjectFor(aNode)
 {
-	if ('getBoxObjectFor' in aNode.ownerDocument)
-		return aNode.ownerDocument.getBoxObjectFor(aNode);
-
 	if (!('boxObject' in boxObjectModule)) {
 		Components.utils.import(
 			'resource://xulmigemo-modules/boxObject.js',
@@ -450,12 +447,14 @@ mydump("findInDocument ==========================================");
  
 	dispatchProgressEvent : function(aFindFlag, aResultFlag) 
 	{
-		var event = this.document.createEvent('Events');
+		var event = this.document.createEvent('DataContainerEvent');
 		event.initEvent('XMigemoFindProgress', true, false);
-		event.resultFlag = aResultFlag;
-		event.findFlag   = aFindFlag;
-		event.findTerm   = this.lastKeyword;
-		event.foundTerm  = aResultFlag & this.FOUND ? this.lastFoundWord : null ;
+		event.setData('data', {
+			resultFlag: aResultFlag,
+			findFlag:   aFindFlag,
+			findTerm:   this.lastKeyword,
+			foundTerm:  aResultFlag & this.FOUND ? this.lastFoundWord : null 
+		});
 		this.document.dispatchEvent(event);
 	},
   
@@ -527,8 +526,9 @@ mydump('getParentEditableFromRange');
 		{
 			var isEditable = false;
 			try {
-				node.QueryInterface(Ci.nsIDOMNSEditableElement);
-				return node;
+				node = node.QueryInterface(Ci.nsIDOMNSEditableElement);
+				if (node.editor)
+					return node;
 			}
 			catch(e) {
 			}
@@ -793,7 +793,6 @@ mydump("setSelectionAndScroll");
 
 		var selection = frame.getSelection();
 		if (!selection || !selection.rangeCount) return;
-		var elem;
 
 		var padding = Math.max(0, Math.min(100, this.prefs.getPref('xulmigemo.scrollSelectionToCenter.padding')));
 
@@ -804,33 +803,13 @@ mydump("setSelectionAndScroll");
 			targetW,
 			targetH;
 
-		if (frame.document.foundEditable) {
-			elem = frame.document.foundEditable;
-			var box = getBoxObjectFor(elem);
-			targetX = box.x;
-			targetY = box.y;
-			targetW = box.width;
-			targetH = box.height;
-		}
-		else {
-			var range = frame.document.createRange();
-			elem = frame.document.createElement('span');
-			range.setStart(selection.focusNode, selection.focusOffset);
-			range.setEnd(selection.focusNode, selection.focusOffset);
-			range.insertNode(elem);
+		var box = getBoxObjectFor(frame.document.foundEditable || selection.getRangeAt(0));
+		if (box.fixed) return;
 
-			var box = getBoxObjectFor(elem);
-			if (!box.x && !box.y)
-				box = getBoxObjectFor(elem.parentNode);
-
-			targetX = box.x;
-			targetY = box.y;
-			targetW = box.width;
-			targetH = box.height;
-
-			elem.parentNode.removeChild(elem);
-			range.detach();
-		}
+		targetX = box.x;
+		targetY = box.y;
+		targetW = box.width;
+		targetH = box.height;
 
 		var viewW = frame.innerWidth;
 		var xUnit = viewW * (padding / 100);
@@ -880,7 +859,8 @@ mydump("setSelectionAndScroll");
 		};
 		this.animationManager.addTask(
 			frame.__xulmigemo__findSmoothScrollTask,
-			0, 0, this.prefs.getPref('xulmigemo.scrollSelectionToCenter.smoothScroll.duration')
+			0, 0, this.prefs.getPref('xulmigemo.scrollSelectionToCenter.smoothScroll.duration'),
+			frame
 		);
 	},
  
@@ -936,8 +916,8 @@ mydump("setSelectionAndScroll");
 					.XULBrowserWindow;
 		}
 		catch(e) {
-			return;
 		}
+		if (!xulBrowserWindow) return;
 
 		if (!aLink || !aLink.href) {
 			xulBrowserWindow.setOverLink('', null);

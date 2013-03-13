@@ -3,6 +3,7 @@ const Cc = Components.classes;
 const Ci = Components.interfaces;
 
 Components.utils.import('resource://gre/modules/XPCOMUtils.jsm');
+Components.utils.import('resource://xulmigemo-modules/here.js');
 
 const Prefs = Cc['@mozilla.org/preferences;1']
 			.getService(Ci.nsIPrefBranch);
@@ -203,12 +204,12 @@ xmXMigemoTextUtils.prototype = {
 
 		return result.join('');
 	},
-	kEXCEPTION_EXPRESSION : <![CDATA[
+	kEXCEPTION_EXPRESSION : here(/*
 		descendant::*[
 			contains(" SCRIPT script TEXTAREA textarea textbox ", concat(" ", local-name(), " ")) or
 			((local-name()="INPUT" or local-name()="input") and contains("TEXT text FILE file", @type))
 		]
-	]]>.toString(),
+	*/),
   
 /* manipulate regular expressions */ 
 	
@@ -526,7 +527,7 @@ xmXMigemoTextUtils.prototype = {
 				lastNode = nodes[i];
 				i++;
 			}
-			while (this.visibleNodeFilter.acceptNode(nodes[i]) != this.visibleNodeFilter.kACCEPT && i < maxi);
+			while (nodes[i] && this.visibleNodeFilter.acceptNode(nodes[i]) != this.visibleNodeFilter.kACCEPT && i < maxi);
 		}
 		else {
 			let i = nodes.length-1;
@@ -534,7 +535,7 @@ xmXMigemoTextUtils.prototype = {
 				lastNode = nodes[i];
 				i--;
 			}
-			while (this.visibleNodeFilter.acceptNode(nodes[i]) != this.visibleNodeFilter.kACCEPT && i > -1);
+			while (nodes[i] && this.visibleNodeFilter.acceptNode(nodes[i]) != this.visibleNodeFilter.kACCEPT && i > -1);
 		}
 
 		this.visibleNodeFilter.clear();

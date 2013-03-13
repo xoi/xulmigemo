@@ -9,8 +9,10 @@
                    em:description="Provides advanced incremental search for any language."
                    em:homepageURL="http://piro.sakura.ne.jp/xul/xulmigemo/"
                    em:optionsURL="chrome://xulmigemo/content/config/config.xul"
-                   em:iconURL="chrome://xulmigemo/content/icon.png">
-	<em:creator>plus7, SHIMODA Hiroshi</em:creator>
+                   em:iconURL="chrome://xulmigemo/content/icon.png"
+                   em:type="2"
+                   em:unpack="true"><!-- when .xpt is removed, remove this too. -->
+	<em:creator>plus7, YUKI "Piro" Hiroshi</em:creator>
 	<em:contributor>alice0775</em:contributor>
 	<em:contributor>Dear Periwinkle</em:contributor>
 
@@ -24,7 +26,7 @@
                        em:name="XUL/Migemo"
                        em:description="This provides advanced incremental search. You can find Japanese words incremental with roman input, like the Migemo."
                        em:homepageURL="http://piro.sakura.ne.jp/xul/_xulmigemo.html.en">
-		<em:creator>plus7, SHIMODA Hiroshi</em:creator>
+		<em:creator>plus7, YUKI "Piro" Hiroshi</em:creator>
 		<em:contributor>alice0775</em:contributor>
 		<em:contributor>Dear Periwinkle</em:contributor>
       </RDF:Description>
@@ -34,7 +36,7 @@
                        em:name="XUL/Migemo"
                        em:description="Migemo風のローマ字入力による日本語逐次検索など、より高機能なインクリメンタル検索機能を提供します。"
                        em:homepageURL="http://piro.sakura.ne.jp/xul/_xulmigemo.html">
-		<em:creator>plus7, SHIMODA Hiroshi</em:creator>
+		<em:creator>plus7, YUKI "Piro" Hiroshi</em:creator>
 		<em:contributor>alice0775</em:contributor>
 		<em:contributor>Dear Periwinkle</em:contributor>
       </RDF:Description>
@@ -44,14 +46,18 @@
 	<em:targetApplication>
       <!-- Firefox -->
 	  <RDF:Description em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-	                   em:minVersion="4.0"
-	                   em:maxVersion="13.0a1" />
+	                   em:minVersion="10.0"
+	                   em:maxVersion="20.0a1" />
     </em:targetApplication>
+<!--
     <em:targetApplication>
+-->
       <!-- Thunderbird -->
+<!--
 	  <RDF:Description em:id="{3550f703-e582-4d05-9a08-453d09bdfdc6}"
 	                   em:minVersion="3.0"
 	                   em:maxVersion="3.1.*" />
 	</em:targetApplication>
+-->
   </RDF:Description>
 </RDF:RDF>

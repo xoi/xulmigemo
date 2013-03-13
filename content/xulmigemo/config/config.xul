@@ -26,15 +26,6 @@
 		<preference id="xulmigemo.scrollSelectionToCenter"
 			name="xulmigemo.scrollSelectionToCenter"
 			type="bool"/>
-		<preference id="xulmigemo.highlight.showScreen"
-			name="xulmigemo.highlight.showScreen"
-			type="bool"/>
-		<preference id="xulmigemo.highlight.animationStyle"
-			name="xulmigemo.highlight.animationStyle"
-			type="int"/>
-		<preference id="xulmigemo.highlight.foundMarker.enabled"
-			name="xulmigemo.highlight.foundMarker.enabled"
-			type="bool"/>
 		<preference id="xulmigemo.autostart.regExpFind"
 			name="xulmigemo.autostart.regExpFind"
 			type="bool"/>
@@ -84,24 +75,6 @@
 		<checkbox id="xulmigemo.scrollSelectionToCenter-check" flex="1"
 			label="&config.scrollSelectionToCenter;"
 			preference="xulmigemo.scrollSelectionToCenter"/>
-		<checkbox id="xulmigemo.highlight.showScreen-check" flex="1"
-			label="&config.highlight.showScreen;"
-			preference="xulmigemo.highlight.showScreen"/>
-		<hbox align="center">
-			<spacer style="width:1em;"/>
-			<label value="&config.highlight.animationStyle;"
-				control="xulmigemo.highlight.animationStyle-radiogroup"/>
-			<radiogroup orient="horizontal"
-				id="xulmigemo.highlight.animationStyle-radiogroup"
-				preference="xulmigemo.highlight.animationStyle"
-				align="center">
-				<radio label="&config.highlight.animationStyle.0;" value="0"/>
-				<radio label="&config.highlight.animationStyle.1;" value="1"/>
-			</radiogroup>
-		</hbox>
-		<checkbox id="xulmigemo.highlight.foundMarker.enabled-check" flex="1"
-			label="&config.highlight.foundMarker;"
-			preference="xulmigemo.highlight.foundMarker.enabled"/>
 		<checkbox id="xulmigemo.autostart.regExpFind-check" flex="1"
 			label="&config.autoStartRegExpFind;"
 			preference="xulmigemo.autostart.regExpFind"/>
@@ -132,27 +105,19 @@
 </prefpane>
 
 
-<prefpane id="prefpane-appearance" label="&config.tab.appearance;" flex="1">
+<prefpane id="prefpane-findbar" label="&config.tab.findbar;" flex="1">
 	<preferences>
-		<preference id="xulmigemo.checked_by_default.findbar"
-			name="xulmigemo.checked_by_default.findbar"
-			type="bool"/>
-
 		<preference id="xulmigemo.appearance.buttonLabelsMode"
 			name="xulmigemo.appearance.buttonLabelsMode"
 			type="int"/>
-		<preference id="xulmigemo.appearance.findBarPosition"
-			name="xulmigemo.appearance.findBarPosition"
-			type="int"/>
-		<preference id="xulmigemo.appearance.closeButtonPosition"
-			name="xulmigemo.appearance.closeButtonPosition"
+		<preference id="xulmigemo.prefillwithselection"
+			name="xulmigemo.prefillwithselection"
+			type="bool"/>
+		<preference id="xulmigemo.findMode.always"
+			name="xulmigemo.findMode.always"
 			type="int"/>
 	</preferences>
 
-	<vbox>
-	<checkbox id="xulmigemo.checked_by_default.findbar-check" flex="1"
-		label="&config.checked_by_default.findbar;"
-		preference="xulmigemo.checked_by_default.findbar"/>
 	<groupbox orient="vertical">
 		<caption label="&config.appearance.buttonLabelsMode;"/>
 		<radiogroup id="xulmigemo.appearance.buttonLabelsMode-radiogroup"
@@ -171,58 +136,6 @@
 			</hbox>
 		</radiogroup>
 	</groupbox>
-	<groupbox orient="vertical">
-		<caption label="&config.appearance.findBarPosition;"/>
-		<radiogroup id="xulmigemo.appearance.findBarPosition-radiogroup"
-			preference="xulmigemo.appearance.findBarPosition"
-			orient="horizontal">
-			<radio value="0" label="&config.appearance.findBarPosition.0;"
-				class="image" align="center"
-				src="chrome://xulmigemo/content/res/findbar-belowcontent.png"/>
-			<radio value="1" label="&config.appearance.findBarPosition.1;"
-				class="image" align="center"
-				src="chrome://xulmigemo/content/res/findbar-abovecontent.png"/>
-			<radio value="2" label="&config.appearance.findBarPosition.2;"
-				class="image" align="center"
-				src="chrome://xulmigemo/content/res/findbar-belowtab.png"/>
-		</radiogroup>
-	</groupbox>
-	<groupbox orient="vertical">
-		<caption label="&config.appearance.closeButtonPosition;"/>
-		<radiogroup id="xulmigemo.appearance.closeButtonPosition-radiogroup"
-			preference="xulmigemo.appearance.closeButtonPosition"
-			orient="horizontal">
-			<radio value="0" label="&config.appearance.closeButtonPosition.0;"
-				class="image" align="center"
-				src="chrome://xulmigemo/content/res/close-leftmost.png"/>
-			<radio value="1" label="&config.appearance.closeButtonPosition.1;"
-				class="image" align="center"
-				src="chrome://xulmigemo/content/res/close-rightmost.png"/>
-		</radiogroup>
-	</groupbox>
-	</vbox>
-</prefpane>
-
-
-<prefpane id="prefpane-findbar" label="&config.tab.findbar;" flex="1">
-	<preferences>
-		<preference id="xulmigemo.prefillwithselection"
-			name="xulmigemo.prefillwithselection"
-			type="bool"/>
-		<preference id="xulmigemo.checked_by_default.highlight.always"
-			name="xulmigemo.checked_by_default.highlight.always"
-			type="bool"/>
-		<preference id="xulmigemo.checked_by_default.highlight.always.minLength"
-			name="xulmigemo.checked_by_default.highlight.always.minLength"
-			type="int"/>
-		<preference id="xulmigemo.checked_by_default.caseSensitive.always"
-			name="xulmigemo.checked_by_default.caseSensitive.always"
-			type="bool"/>
-		<preference id="xulmigemo.findMode.always"
-			name="xulmigemo.findMode.always"
-			type="int"/>
-	</preferences>
-
 	<groupbox orient="vertical">
 		<caption label="&config.findbar.permanentState;"/>
 		<hbox align="center">
@@ -248,23 +161,6 @@
 				<radio label="&ui.mode.migemo.label;" value="2"/>
 			</radiogroup>
 		</hbox>
-		<separator class="groove"/>
-		<hbox align="center">
-			<checkbox id="xulmigemo.checked_by_default.highlight.always-check"
-				label="&config.checked_by_default.highlight.always;"
-				preference="xulmigemo.checked_by_default.highlight.always"/>
-			<label value="&config.checked_by_default.highlight.always.minLength.before;"
-				control="xulmigemo.checked_by_default.highlight.always.minLength-textbox"/>
-			<textbox id="xulmigemo.checked_by_default.highlight.always.minLength-textbox"
-				preference="xulmigemo.checked_by_default.highlight.always.minLength"
-				style="width: 3em;"
-				type="number" min="1" increment="1"/>
-			<label value="&config.checked_by_default.highlight.always.minLength.after;"
-				control="xulmigemo.checked_by_default.highlight.always.minLength-textbox"/>
-		</hbox>
-		<checkbox id="xulmigemo.checked_by_default.caseSensitive.always-check"
-			label="&config.checked_by_default.caseSensitive.always;"
-			preference="xulmigemo.checked_by_default.caseSensitive.always"/>
 	</groupbox>
 
 	<hbox align="center">
